@@ -128,8 +128,8 @@ inp.addEventListener('keypress', enterPressed)
 
 function enterPressed() {
   const inputed = document.getElementById('get-selector').value
-  if (event.key === 'Enter') {
-    console.log('event.key' + event.key)
+  if (ev.key === 'Enter') {
+    console.log('event.key' + ev.key)
     console.log('inputed' + inputed)
     hideElements()
   }
