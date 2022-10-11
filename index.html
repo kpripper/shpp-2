@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>task2-1</title>
-    <link rel="stylesheet" href="/level-1-2/style.css" />
-    <script src="/level-1-2/main.js" defer></script>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/main.js" defer></script>
 </head>
 
 <body>
@@ -31,21 +31,41 @@
             </div>
         </div>
 
-        <div class="images"><img class="img" src="" alt=""></div>
-        <input type="text" name="" id="get-selector" placeholder="Input selector">
-        <p>https://vjoy.cc/wp-content/uploads/2020/10/dlya_dushi_35_13130628.jpg</p>
-        <p>https://klike.net/uploads/posts/2019-05/1556708032_1.jpg</p>
-        <textarea class="my-textarea"></textarea>
-        <div class="button button-get-images">
-            <div class="text-on-button">Get images</div>
-        </div>
-        <div class="yellow-square"></div>
-        <div class="green-rect"></div>
-        <div class="button button-red-square">
-            <div class="text-on-button">Display red square</div>
-        </div>
-        <div class="red-square"></div>
+        <label for="myfile">Select a file:<br>Tip: Always add the <label> tag for best accessibility practices!</label>
+            <input type="file" id="myfile" name="myfile">
+            <input type="submit">
+            <div class="images"><img class="img" src="" alt=""></div>
+            <input type="text" name="" id="get-selector" placeholder="Input selector">
+            <p>https://vjoy.cc/wp-content/uploads/2020/10/dlya_dushi_35_13130628.jpg</p>
+            <p>https://klike.net/uploads/posts/2019-05/1556708032_1.jpg</p>
+            <textarea class="my-textarea"></textarea>
+            <div class="button button-get-images">
+                <div class="text-on-button">Get images</div>
+            </div>
+            <div class="yellow-square"></div>
+            <div class="green-rect"></div>
+            <div class="button button-red-square">
+                <div class="text-on-button">Display red square</div>
+            </div>
+            <div class="red-square"></div>
+            <div class="coordinates"></div>
+            <div class="cursor-position"></div>
+            <div class="browser-lang"></div>
+            <div class="outer-alert button">outer alert
+                <div class="inner-alert button">inner alert</div>
+            </div>
+            <div class="transparent-popup button">Transparent popup
 
+            </div>
+            <div class="popup"></div>
+            <form class="form"><input type="submit" value="GO"></form>
+
+            <div class="clear-session-storage button">Clear local and session storage</div>
+            <div contenteditable="true" class="editable">
+                <p>Text to edit</p>
+            </div>
+            <div contenteditable="true" class="from-cookies"></div>
+            <div class="to-top-button button">To top</div>
     </div>
 
 </body>

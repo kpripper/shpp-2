@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   max-width: 1138px;
   margin: 0 auto;
   display: flex;
@@ -7,24 +8,24 @@
 }
 
 input {
- margin:0 0 10px 0;
- font-size: 16px;
+  margin: 0 0 10px 0;
+  font-size: 16px;
 }
 
 .img {
   max-width: 300px;
 }
 
-.images img{
+.images img {
   max-width: 300px;
 }
 
 .squares {
-    display: flex;
+  display: flex;
 }
 
 .square {
-    display: block;
+  display: block;
 }
 
 .black-square {
@@ -57,7 +58,7 @@ input {
   margin: 10px;
 }
 
-.button-red-square:hover .red-square{
+.button-red-square:hover .red-square {
   display: block;
   background-color: rgb(0, 255, 145);
 }
@@ -82,4 +83,63 @@ input {
   width: 300px;
   height: 150px;
   margin: 0 0 10px 0;
+}
+
+.coordinates {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.cursor-position {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+}
+
+.browser-lang {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+}
+
+.to-top-button {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+}
+
+.outer-alert {
+  height: 150px;
+}
+
+.inner-alert {
+  height: 50px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
+#myfile {
+  padding: 10px;
+}
+
+.file-chosen {
+  border:3px solid rgb(0, 110, 255)
 }

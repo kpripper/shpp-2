@@ -191,3 +191,189 @@ function getImages() {
     // console.log(index + ' ' + links[index])
   }
 }
+
+///////////////////Geo location/////////////
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+}
+
+function success(pos) {
+  const crd = pos.coords
+  const coordinatesDiv = document.querySelector('.coordinates')
+  const coordinatesText = `Latitude : ${crd.latitude}<br>Longitude: ${crd.longitude}`
+
+  coordinatesDiv.innerHTML = coordinatesText
+
+  console.log(`Latitude : ${crd.latitude}`)
+  console.log(`Longitude: ${crd.longitude}`)
+  console.log(`More or less ${crd.accuracy} meters.`)
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`)
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options)
+
+///////////////////Cursor////////////////
+document.addEventListener('mousemove', getCursorPosition)
+
+function getCursorPosition(ev) {
+  console.log('getCursorPosition')
+  var xCursorPosition = ev.clientX
+  var yCursorPosition = ev.clientY
+  const cursorPositionDiv = document.querySelector('.cursor-position')
+  const cursorPositionText = `X : ${xCursorPosition}<br>Y: ${yCursorPosition}`
+
+  cursorPositionDiv.innerHTML = cursorPositionText
+}
+
+//////////////window.navigator.language//////////////
+
+// const language = headers['Accept-Language'];
+
+const language = navigator.userLanguage
+
+const ls = `${language} <br> ${window.navigator.language} <br> ${navigator.languages} <br> ${navigator.languages[0]}`
+
+document.querySelector('.browser-lang').innerHTML = ls
+
+///////////editable text///////////
+
+//localStorage
+
+window.addEventListener('load', getInitialText)
+window.onbeforeunload = saveText
+
+document
+  .querySelector('.clear-session-storage')
+  .addEventListener('click', clearSessionStorage)
+
+// window.addEventListener('load', (event) => {
+//   console.log('page is fully loaded')
+// })
+
+function clearSessionStorage() {
+  sessionStorage.clear()
+  console.log('sessionStorage' + sessionStorage.length)
+  localStorage.clear()
+  console.log('localStorage' + localStorage.length)
+}
+
+function getInitialText() {
+  console.log('getInitialText')
+  let savedText = localStorage.getItem('editedTextKey')
+  let savedTextSession = sessionStorage.getItem('editedTextKey')
+  console.log('savedText:' + savedText)
+  if (savedText) {
+    // document.querySelector('.editable').innerHTML = `${savedText} <br>
+    // savedTextSession: ${savedTextSession}`
+
+    const fromCookiesP = document.createElement('p')
+    const fromCookies = document.querySelector('.from-cookies')
+    const textFromCookies = document.createTextNode(document.cookie)
+    fromCookies.insertBefore(
+      fromCookiesP,
+      fromCookies.appendChild(textFromCookies)
+    )
+  } else {
+    document.querySelector('.editable').innerHTML = 'Initial editable text'
+  }
+}
+
+function saveText() {
+  let editableText = document.querySelector('.editable').innerHTML
+  console.log('editableText:' + editableText)
+  localStorage.setItem('editedTextKey', editableText)
+  sessionStorage.setItem('editedTextKey', editableText)
+
+  document.cookie = `editedTextKey=${editableText}`
+  console.log('document.cookie:' + document.cookie)
+}
+
+/////////to top button////////////
+
+const backToTopButton = document.querySelector('.to-top-button')
+
+window.onscroll = function () {
+  scrollFunction()
+  console.log('window.innerHeight:' + window.innerHeight)
+}
+
+function scrollFunction() {
+  console.log('window.scrollY:' + window.scrollY)
+  console.log('document.body.scrollHeight:' + document.body.scrollHeight)
+
+  if (
+    window.scrollY > 20 &&
+    window.scrollY + window.innerHeight > document.body.scrollHeight - 100
+  ) {
+    backToTopButton.style.display = 'block'
+  } else {
+    backToTopButton.style.display = 'none'
+  }
+}
+
+const goToTop = () => {
+  document.body.scrollIntoView({
+    behavior: 'smooth',
+  })
+}
+
+backToTopButton.addEventListener('click', goToTop)
+
+////////alerts outer and inner////////////////
+const outerAlert = document.querySelector('.outer-alert')
+const innerAlert = document.querySelector('.inner-alert')
+
+outerAlert.addEventListener('click', alertOuter)
+innerAlert.addEventListener('click', alertInner)
+
+function alertInner(ev) {
+  ev.stopPropagation()
+  console.log('alertInner')
+}
+
+function alertOuter() {
+  console.log('alertOuter')
+}
+
+///////////Transparent popup///////////
+
+document.querySelector('.transparent-popup').addEventListener('click', popup)
+document.querySelector('.popup').addEventListener('click', popupHide)
+
+function popup() {
+  document.querySelector('.popup').style.display = 'block'
+  document.body.classList.add('stop-scrolling')
+}
+
+function popupHide() {
+  console.log('popupHide')
+  document.querySelector('.popup').style.display = 'none'
+  document.body.classList.remove('stop-scrolling')
+}
+
+///////////////form///////////////
+
+const form = document.querySelector('.form')
+
+form.addEventListener('submit', handleForm)
+
+function handleForm(ev) {
+  ev.preventDefault()
+}
+
+
+//////////////file upload////////////
+
+const inputFile = document.querySelector('#myfile')
+inputFile.addEventListener('change', updateInput);
+
+function updateInput() {
+  inputFile.classList.add('file-chosen')
+}
+
