@@ -5,10 +5,14 @@ let citiesRate = []
 
 const mainReturn = (fileInput.onchange = () => {
   const reader = new FileReader()
-
-  reader.readAsText(fileInput.files[0])
+  console.log('selectedFile')
+  const selectedFile = fileInput.files[0]
+  console.log(reader.readAsText(selectedFile)) //- undefined
 
   reader.addEventListener('load', (event) => {
+    console.log('load')
+    const fileList = event.target.files
+    console.log('fileList ' + fileList) //- undefined
     const result = event.target.result
     console.log(result)
 
@@ -27,6 +31,22 @@ const mainReturn = (fileInput.onchange = () => {
   })
 
   const textarea = document.querySelector('.cities-textarea')
+
+  textarea.addEventListener('keypress', function (event) {
+    console.log('keypress')
+    const text = textarea.value
+    if (event.key === 'Enter') {
+      console.log(text)
+    }
+  })
+
+  // const buttonGetCities = document.querySelector('.button-get-cities')
+  // buttonGetCities.addEventListener('click', getCities)
+  // function getCities () {
+  //   console.log('getCities')
+  //   const text = textarea.value
+  //   console.log(text)
+  // }
 
   //////////function 2//////////////////
 
@@ -52,3 +72,5 @@ const mainReturn = (fileInput.onchange = () => {
     return text
   })
 })
+
+console.log('mainReturn' + mainReturn)
