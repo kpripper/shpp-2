@@ -68,7 +68,7 @@ input {
   border-radius: 3px;
   width: fit-content;
   padding: 10px;
-  margin: 0 10px 0px 0;
+  margin: 10px;
 }
 
 .buttons {
@@ -79,7 +79,7 @@ input {
   visibility: hidden;
 }
 
-.my-textarea {
+.my-textarea, .cities-textarea {
   width: 300px;
   height: 150px;
   margin: 0 0 10px 0;

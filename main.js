@@ -126,7 +126,7 @@ inp.addEventListener('input', hideGreenRect)
 
 inp.addEventListener('keypress', enterPressed)
 
-function enterPressed() {
+function enterPressed(ev) {
   const inputed = document.getElementById('get-selector').value
   if (ev.key === 'Enter') {
     console.log('event.key' + ev.key)
@@ -377,3 +377,53 @@ function updateInput() {
   inputFile.classList.add('file-chosen')
 }
 
+
+////////////////////////////////////////////////////////////
+
+const inpCity = document.querySelector('#get-word')
+
+inpCity.addEventListener('keypress', enterPressed)
+
+function enterPressed(ev) {
+  const inputed = inpCity.value
+  if (ev.key === 'Enter') {
+    console.log(
+      inputed //bbb2
+        .toLowerCase()
+        // повертає [b,b,b,2]
+        .split('')
+        //повертає новий масив, в якому кожен елемент відповідає регулярці
+        // - деталі RegExp.prototype.test()
+        // повертає [b,b,b]
+        .filter((a) => /[a-z]/.test(a))
+        //повертає масив з чарами літер попереднього масиву [99, 99, 99]
+        .map((c) => c.charCodeAt())
+        //повертає масив, де індекс це чар,
+        //а значення - скільки разів він зустрівся в попередньому масиві
+        //bbb - (99) [empty × 98, 3] b має чар 99, значить 99-й елемент має значення 3
+        .reduce((a, c) => ((a[c] = (a[c] || 0) + 1), a), [])
+        //обрізає попередній масив з 97 елемента - "a".charCodeAt()
+        //виходить новий масив, де індекс це номер букви (а - 0, z - 25)
+        //а значення - скільки раз її чар зустрівся в попередньому масиві
+        ///bbb - (2) [empty, 3] букв а не було, перший елемент пустий, другий - 3
+        .slice('a'.charCodeAt())
+        //повертає  [ { "c": 2,  "i": 0, "l": "a"}, { "c": 3,"i": 1,"l": "b"} ]
+        //масив об'єктів, де
+        //с - скільки раз зустрівся елемент (літера)
+        //і - індекс масиву (від 0 до 25)
+        //l - літера, додаємо до індексу 97 щоб її отримати
+        //(наприклад, індекс 1 у нас мають b, щоб з 1 отримати b - додаємо 97 і робимо String.fromCharCode )
+        .map((c, i) => ({ c, i, l: String.fromCharCode(i + 97) }))
+        //   сортує масив об'єктів по ключу с
+        //  якщо стрілочна ф-ція повертає > 0  тоді sort a after b
+        //  < 0	sort a before b
+        //  === 0	keep original order of a and b
+        //повертає  [ { "c": 3,"i": 1,"l": "b"}, { "c": 2,  "i": 0, "l": "a"}]
+        .sort((a, b) => (b.c || 0) - (a.c || 0))
+        //  повертає масив рядків ['b - 3', 'a - 2']
+        .map(({ c, l }) => `${l} - ${c}`)
+        // з'єднує елементи в один рядок, розділені переносом строки
+        .join('\n')
+    )
+  }
+}
