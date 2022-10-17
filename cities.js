@@ -1,4 +1,4 @@
-const fileInput = document.getElementById('myfile')
+const fileInput = document.getElementById('cities-file')
 let citiesRate = []
 
 /////////////function 1///////////////////
